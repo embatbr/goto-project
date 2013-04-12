@@ -5,6 +5,8 @@ goto project - easy'n'fast cd'ing
 
 Tired of typing a lot to get where the fun is happening? `goto` was made for you!
 
+Version: 0.1
+
 
 goto
 ----
