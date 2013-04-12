@@ -1,7 +1,7 @@
 goto project - easy'n'fast cd'ing
 =================================
 
-(Fork do goto em python 3 e mais "git like")
+(Fork of pauloborges/goto in python 3 and more "git like")
 
 Tired of typing a lot to get where the fun is happening? `goto` was made for you!
 
