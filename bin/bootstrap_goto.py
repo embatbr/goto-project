@@ -1,4 +1,4 @@
-#!/usr/bin/python3.3
+"""This module calls the 'real' code."""
 
 
 import sys
@@ -9,7 +9,7 @@ def bootstrap():
     del sys.argv[0]
 
     if sys.argv[0] == 'goto':
-        return "The command 'goto' was called."
+        print("The command 'goto' was called.")
 
 
 if __name__ == '__main__':

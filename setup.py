@@ -1,11 +1,16 @@
-#!/usr/bin/python3.3
+#!/usr/bin/python3.2
+"""Setup script. It creates a distribution and installs the program into the
+system.
+
+"""
 
 
 from distutils.core import setup
 
 
+# call for function-all-in-one setup()
 setup(name='goto-project',
-      version='0.1',
+      version='v0.0',
       author='Eduardo Tenório',
       author_email='embatbr@gmail.com',
       url='https://github.com/embatbr/goto-py3',
