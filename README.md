@@ -5,12 +5,12 @@ Tired of typing a lot to get where the fun is happening? `goto` was made for you
 
 This project is a fork from [paulo borges' goto project](https://github.com/pauloborges/goto) implemented using python 3 and more "git like".
 
-Version: 0.0
+Version: 0
 Python: 3.2
 
 
-Version numbering scheme
-------------------------
+Versioning
+----------
 
 The version number is in the format V.R, starting from 0 with no limits. A version like "goto-project-1.0" can have it's zeros omitted and be simply called "goto-project-1".
 

@@ -4,7 +4,7 @@
 function goto()
 {
     ARGS="$@"
-    ./bootstrap.py goto $ARGS
+    bootstrap.py goto $ARGS
     echo $RET
 }
 
