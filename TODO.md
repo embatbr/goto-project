@@ -5,62 +5,66 @@ This file is intended to set the project goals. The goals are divided into secti
 
 ##Version 0.1
 
-* Create file *~/.goto/labels*
+1. Create file *~/.goto/labels* [OK]
 
     Creates (if doesn't exist) a file *labels* inside a hidden directory *goto* in the *home* directory.
 
+2. Create file *~/.goto/stack* [OK]
 
-* Working command `goto`
+    Creates (if doesn't exist) a file *stack* inside a hidden directory *goto* in the *home* directory.
 
-    * list the *~/.goto/labels* file
+
+3. Working command `goto`
+
+    1. list the *~/.goto/labels* file
 
         When typed without parameters or flags.
 
-    * change directory using `goto label`
+    2. change directory using `goto label`
 
         If the label and the target are valid.
 
 
-* Be installed in the system
+4. Be installed in the system
 
     Copy the scripts to */usr/bin* and edit *~/.bashrc* file.
 
 
 ##Version 0.2
 
-* Working command `goto-label`
+1. Working command `goto-label`
 
-    * Command must be typed like `goto-label [-h] [-d] <label>`
+    1. Command must be typed like `goto-label [-h] [-d] <label>`
 
-    * It must identify a valid label and target
+    2. It must identify a valid label and target
 
 
 ##Version 0.3
 
-* Command `goto-label`
+1. Command `goto-label`
 
-    * Add flag `-r --replace`
+    1. Add flag `-r --replace`
 
-    * Add optional value `target`
+    2. Add optional value `target`
 
 
 ##Version 0.4
 
-* Working command `goto-list`
+1. Working command `goto-list`
 
-    * Does simple listing
+    1. Does simple listing
 
-* Command `goto`
+2. Command `goto`
 
-    * Add flag `-b [n]` to revert the *n* previous `goto` commands
+    1. Add flag `-b [n]` to revert the *n* previous `goto` commands
 
 
 ##Version 1.0
 
-* Command `goto-list` with all listing flags from bash command `ls`
+1. Command `goto-list` with all listing flags from bash command `ls`
 
-* Command `goto`
+2. Command `goto`
 
-    * Add possibility to discriminate `directory` inside label's target
+    1. Add possibility to discriminate `directory` inside label's target
 
         Ex: `$ goto label/dir`
