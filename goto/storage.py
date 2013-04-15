@@ -21,9 +21,11 @@ class Storage(object):
         self.stack_path = os.path.join(goto_dir, stack_filename)
         self.labels = {}
         self.stack = []
-        self.open()
+        self.open_files()
 
-    def open(self):
+#### FILE MANIPULATION METHODS ####
+
+    def open_files(self):
         """Open (or create if doesn't exist) files for goto-project."""
         if not os.path.exists(self.goto_dir):
             os.makedirs(self.goto_dir)
@@ -46,9 +48,29 @@ class Storage(object):
         """Reads the file '.goto/stack' and write it's content in self.stack."""
         self.stack = f.read().splitlines()
         self.stack.reverse()
-        print(self.stack)
+
+#### LABEL MANIPULATION METHODS ####
+
+    def get_labels(self):
+        return self.labels
+
+    def get_path(self, label):
+        return self.labels[label]
+
+
+def format_label(label):
+    ret = '%s%s' % (label, (LABEL_SIZE - len(label)) * ' ')
+    return ret
 
 
 if __name__ == '__main__':
-    storage = Storage()
+    teste = Storage()
 
+    print('[labels]')
+    for label in teste.labels:
+        print(format_label(label), teste.labels[label])
+
+    print('\n[stack->base]')
+    for label in teste.stack:
+        print(label)
+    print('[stack->top]')

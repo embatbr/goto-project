@@ -1,16 +1,22 @@
+#!/user/bin/python3.2
+
+
 """This module calls the 'real' code."""
 
 
 import sys
 
+from goto import goto_main
 
-def bootstrap():
-    """Function to call goto commands."""
-    del sys.argv[0]
 
-    if sys.argv[0] == 'goto':
-        print("The command 'goto' was called.")
+def bootstrap(args):
+    """Function to call the commands."""
+    if args[0] == 'goto':
+        return goto_main()
+
+    sys.exit(-1)
 
 
 if __name__ == '__main__':
-    bootstrap()
+    del sys.argv[0]
+    bootstrap(sys.argv)

@@ -1,11 +1,20 @@
 #!/bin/bash
 
 
-function goto()
+goto()
 {
     ARGS="$@"
-    bootstrap.py goto $ARGS
-    echo $RET
+    python3.2 bootstrap_goto.py goto $ARGS
 }
 
-goto
+
+goto-label()
+{
+    echo "typed goto-label"
+}
+
+
+goto-list()
+{
+    echo "typed goto-list"
+}

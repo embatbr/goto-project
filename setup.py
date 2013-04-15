@@ -15,7 +15,7 @@ def readme():
 
 
 setup(name='goto-project',
-      version='v0.0',
+      version='0.1.1-pre-alpha',
       author='Eduardo Tenório',
       author_email='embatbr@gmail.com',
 
@@ -23,5 +23,6 @@ setup(name='goto-project',
       description="easy'n'fast cd'ing",
       long_description=readme(),
 
-      packages=['goto']
-      # scripts=['bin/bootstrap_goto.py', 'bin/goto.sh'],)
+      packages=['goto'],
+      scripts=['bin/bootstrap_goto.py', 'bin/goto.sh'],
+      )

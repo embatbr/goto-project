@@ -13,21 +13,19 @@ This file is intended to set the project goals. The goals are divided into secti
 
     Creates (if doesn't exist) a file *stack* inside a hidden directory *goto* in the *home* directory.
 
+3. Working command `goto` [OK]
 
-3. Working command `goto`
-
-    1. list the *~/.goto/labels* file
+    1. List the *~/.goto/labels* file
 
         When typed without parameters or flags.
-
-    2. change directory using `goto label`
-
-        If the label and the target are valid.
-
 
 4. Be installed in the system
 
     Copy the scripts to */usr/bin* and edit *~/.bashrc* file.
+
+###Version 0.1.1
+
+1. Created a new function `format_label` [OK]
 
 
 ##Version 0.2
@@ -37,6 +35,10 @@ This file is intended to set the project goals. The goals are divided into secti
     1. Command must be typed like `goto-label [-h] [-d] <label>`
 
     2. It must identify a valid label and target
+
+2. Command `goto`
+
+    1. Change directory using `goto label_name`
 
 
 ##Version 0.3
