@@ -1,6 +1,8 @@
 #!/bin/bash
 
+rm -Rf bin/__pycache__ goto/__pycache__
+clear
 
-./test_goto.py "$@"
+./tests/goto.py "$@"
 
 rm -Rf bin/__pycache__ goto/__pycache__
