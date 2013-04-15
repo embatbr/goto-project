@@ -5,7 +5,8 @@ Tired of typing a lot to get where the fun is happening? `goto` was made for you
 NOTE: This project is a fork from [paulo borges' goto project](https://github.com/pauloborges/goto) implemented using python 3 and with some differences in commands.
 
 Version: 0.1.1-pre-alpha
-Python: 3.2
+
+Python: 3.2.3
 
 
 ##Versioning
