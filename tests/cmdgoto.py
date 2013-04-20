@@ -10,7 +10,7 @@ __depth = 2
 import sys
 import os
 
-path = os.path.abspath(__file__)    # /home/.../goto-project/tests/goto.py
+path = os.path.abspath(__file__)    # /home/.../goto-project/tests/__file__.py
 for i in range(__depth):
     path = os.path.dirname(path)
 sys.path.insert(0, path)
