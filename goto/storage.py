@@ -23,6 +23,22 @@ class Storage(object):
         self.stack = []
         self.open_files()
 
+    def __str__(self):
+        ret = '[goto_dir] %s' % self.goto_dir
+        ret = '%s\n[labels_path] %s' % (ret, os.path.basename(self.labels_path))
+        ret = '%s\n[stack_path] %s' % (ret, os.path.basename(self.stack_path))
+        if self.labels:
+            ret = '%s\n[labels]' % ret
+            for label in self.labels:
+                ret = '%s\n%s%s' % (ret, format_label(label), self.labels[label])
+        if self.stack:
+            ret = '%s\n[stack->base]' % ret
+            for label in self.stack:
+                ret = '%s\n%s' % (ret, label)
+            ret = '%s\n[stack->top]' % ret
+        return ret
+
+
 #### FILE MANIPULATION METHODS ####
 
     def open_files(self):
@@ -45,17 +61,49 @@ class Storage(object):
             self.labels[label] = target
 
     def read_stack(self, f):
-        """Reads the file '.goto/stack' and write it's content in self.stack."""
+        """Reads the file '.goto/stack' and write it's content in self.stack,
+        from base (0) to top (len(self.stack) - 1).
+        """
         self.stack = f.read().splitlines()
-        self.stack.reverse()
+
+    def save(self):
+        """Saves the actual state (new labels and greater stack) into files."""
+        with open(self.labels_path, 'w') as f:
+            for label in self.labels:
+                output = '%s %s\n' % (label, self.labels[label])
+                f.write(output)
+        with open(self.stack_path, 'w') as f:
+            for label in self.stack:
+                output = '%s\n' % label
+                f.write(output)
+
+    def flush(self):
+        """Erase all storage."""
+        self.labels = {}
+        self.stack = []
+
 
 #### LABEL MANIPULATION METHODS ####
 
-    def get_labels(self):
-        return self.labels
+    def add_label(self, label, path):
+        """Adds a label with specified path."""
+        if label in self.labels:
+            raise ExistentLabelError(label)
+        self.labels[label] = path
 
     def get_path(self, label):
+        """Returns the path from a given label."""
+        if label not in self.labels:
+            raise NonexistentLabelError(label)
         return self.labels[label]
+
+    def get_all_labels(self):
+        return self.labels
+
+
+#### STACK MANIPULATION METHODS ####
+
+    # TODO i next version
 
 
 def format_label(label):
@@ -63,14 +111,18 @@ def format_label(label):
     return ret
 
 
-if __name__ == '__main__':
-    teste = Storage()
+class ExistentLabelError(Exception):
 
-    print('[labels]')
-    for label in teste.labels:
-        print(format_label(label), teste.labels[label])
+    def __init__(self, label):
+        self.label = label
+    
+    def __str__(self):
+        return ("The label '%s' alredy exist." % self.label)
 
-    print('\n[stack->base]')
-    for label in teste.stack:
-        print(label)
-    print('[stack->top]')
+class NonexistentLabelError(Exception):
+
+    def __init__(self, label):
+        self.label = label
+    
+    def __str__(self):
+        return ("The label '%s' doesn't exist." % self.label)
