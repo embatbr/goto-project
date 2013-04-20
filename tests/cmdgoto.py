@@ -1,16 +1,19 @@
 #!/usr/bin/python3.2
 
 
-"""Temporary module just for test."""
- 
+"""Several tests for the module 'goto' of package 'goto'."""
+
+
+__depth = 2
+
 
 import sys
 import os
 
 path = os.path.abspath(__file__)    # /home/.../goto-project/tests/goto.py
-dirname = os.path.dirname(path)     # /home/.../goto-project/tests
-dirname = os.path.dirname(dirname)  # /home/.../goto-project
-sys.path.insert(0, dirname)
+for i in range(__depth):
+    path = os.path.dirname(path)
+sys.path.insert(0, path)
 
 from bin import bootstrap
 

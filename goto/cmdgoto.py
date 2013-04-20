@@ -3,14 +3,14 @@
 
 import argparse
 
-from goto.storage import Storage, format_label
+from goto.storage import Storage, ExistentLabelError, format_label
 
 
 storage = Storage()
 
 
 def list_labels():
-    for label in storage.get_labels():
+    for label in storage.get_all_labels():
         s = '%s %s' % (format_label(label), storage.get_path(label))
         print(s)
 
