@@ -23,7 +23,7 @@ This file is intended to set the project goals. The goals are divided into secti
 
     Copy the scripts to */usr/bin* and edit *~/.bashrc* file.
 
-###Version 0.1.1
+###Version 0.1.1 [OK]
 
 1. Created a new function `format_label` [OK]
 
@@ -70,3 +70,10 @@ This file is intended to set the project goals. The goals are divided into secti
     1. Add possibility to discriminate `directory` inside label's target
 
         Ex: `$ goto label/dir`
+
+
+##Version 2.0
+
+1. Change file *~/.goto/labels* format and extension to **JSON**. So, the file will be *~/.goto/labels.json* and `Storage` will use the libs to work with **JSON**.
+
+2. Implement autocomplete using the key **TAB**. Availabe for labels and it's subdirectories.
