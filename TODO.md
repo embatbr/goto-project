@@ -19,7 +19,7 @@ This file is intended to set the project goals. The goals are divided into secti
 
         When typed without parameters or flags.
 
-4. Be installed in the system.
+4. [OK] Be installed in the system.
 
     Copy the scripts to */usr/bin* and edit *~/.bashrc* file.
 
@@ -74,6 +74,6 @@ This file is intended to set the project goals. The goals are divided into secti
 
 ##Version 2.0
 
-1. Change file *~/.goto/labels* format and extension to **JSON**. So, the file will be *~/.goto/labels.json* and `Storage` will use the libs to work with **JSON**.
+1. Change file *~/.goto/labels* format and extension to **JSON**. So, the file will be *~/.goto/labels.json* and **Storage** will use the libs to work with **JSON**.
 
 2. Implement autocomplete using the key **TAB**. Availabe for labels and it's subdirectories.
