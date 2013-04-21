@@ -2,6 +2,8 @@
 
 
 import storage
+import cmdgoto
 
 
 storage.main()
+cmdgoto.main()
