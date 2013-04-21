@@ -3,31 +3,6 @@
 This file is intended to set the project goals. The goals are divided into sections for each version release.
 
 
-##Version 0.1
-
-1. [OK] Create file *~/.goto/labels*.
-
-    Creates (if doesn't exist) a file *labels* inside a hidden directory *goto* in the *home* directory.
-
-2. [OK] Create file *~/.goto/stack*.
-
-    Creates (if doesn't exist) a file *stack* inside a hidden directory *goto* in the *home* directory.
-
-3. [OK] Working command `goto`.
-
-    1. List the *~/.goto/labels* file.
-
-        When typed without parameters or flags.
-
-4. [OK] Be installed in the system.
-
-    Copy the scripts to */usr/bin* and edit *~/.bashrc* file.
-
-###Version 0.1.1 [OK]
-
-1. [OK] Created a new function `format_label`.
-
-
 ##Version 0.2
 
 1. Working command `goto-label`.
