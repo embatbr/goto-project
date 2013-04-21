@@ -4,7 +4,7 @@
 goto()
 {
     ARGS="$@"
-    python3.2 bootstrap_goto.py goto $ARGS
+    bootstrap_goto.py goto $ARGS
 }
 
 

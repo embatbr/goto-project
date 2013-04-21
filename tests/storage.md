@@ -1,4 +1,4 @@
-#Log file for `tests/storage.py`
+#Log file for `goto/storage` module.
 
 This is a log file for tests of module `goto/storage`. A object of type `Storage` is created and it's methods are tested.
 
@@ -10,6 +10,7 @@ This is a log file for tests of module `goto/storage`. A object of type `Storage
     [stack_path] stack
 
 
+
 ##stg.add_label('home', '/home/embat')
 
     [goto_dir] /home/embat/.goto
@@ -17,6 +18,7 @@ This is a log file for tests of module `goto/storage`. A object of type `Storage
     [stack_path] stack
     [labels]
     home            /home/embat
+
 
 
 ##stg.add_label('musicas', '/home/embat/dados/lazer/musicas')
@@ -29,9 +31,11 @@ This is a log file for tests of module `goto/storage`. A object of type `Storage
     musicas         /home/embat/dados/lazer/musicas
 
 
+
 ##stg.add_label('musicas', '/home/embat/Musics')
 
     The label 'musicas' alredy exist.
+
 
 
 ##path = stg.get_path('musicas')
@@ -39,14 +43,17 @@ This is a log file for tests of module `goto/storage`. A object of type `Storage
     musicas         /home/embat/dados/lazer/musicas
 
 
+
 ##path = stg.get_path('jogos')
 
     The label 'jogos' doesn't exist.
 
 
+
 ##labels = stg.get_all_labels()
 
     {'home': '/home/embat', 'musicas': '/home/embat/dados/lazer/musicas'}
+
 
 
 ##stg.save()

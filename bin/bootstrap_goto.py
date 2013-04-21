@@ -6,13 +6,14 @@
 
 import sys
 
-from goto import goto_main
+from goto import Goto
 
 
 def bootstrap(args):
     """Function to call the commands."""
     if args[0] == 'goto':
-        return goto_main()
+        goto = Goto()
+        return goto.run()
 
     sys.exit(-1)
 

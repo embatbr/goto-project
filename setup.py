@@ -1,3 +1,6 @@
+#!/usr/bin/python3.2
+
+
 """Setup script. It creates a distribution and installs the program into the
 system.
 
@@ -25,7 +28,7 @@ def post_install():
     (status, goto_sh_path) = subprocess.getstatusoutput('which goto.sh')
 
     if status != 0:
-        print('Can\'t find goto.tabsh script.')
+        print("Can't find goto.sh script.")
         return None
 
     source_line = ". %s\n" % goto_sh_path
@@ -74,5 +77,5 @@ setup(name='goto-project',
 
       packages=['goto'],
       scripts=['bin/bootstrap_goto.py', 'bin/goto.sh'],
-      cmdclass={'install': GotoInstall}
+      cmdclass={ 'install': GotoInstall }
       )
