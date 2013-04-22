@@ -47,8 +47,13 @@ This file is intended to set the project goals. The goals are divided into secti
         Ex: `$ goto label/dir`.
 
 
+##Version 1.1
+
+1. Implement autocomplete using the key **TAB**. Availabe for labels and it's subdirectories.
+
+
 ##Version 2.0
 
 1. Change file *~/.goto/labels* format and extension to **JSON**. So, the file will be *~/.goto/labels.json* and **Storage** will use the libs to work with **JSON**.
 
-2. Implement autocomplete using the key **TAB**. Availabe for labels and it's subdirectories.
+2. Add the the project's functionalities to **Nautilus**. Use the command `goto` to open directories in graphical mode.
