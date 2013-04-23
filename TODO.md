@@ -11,6 +11,13 @@ This file is intended to set the project goals. The goals are divided into secti
 
     1. Command must be typed like `goto-label [-h] [-d] [label]`, where `-d` means `--delete`.
 
+4. Add optional value `target`, so the command will be `goto-label [-h] [-d] [label [target]]`.
+
+
+###Version 0.2.1
+
+1. Define label format.
+
 
 ##Version 0.3
 
@@ -18,7 +25,6 @@ This file is intended to set the project goals. The goals are divided into secti
 
     1. Add flag `-r --replace`.
 
-    2. Add optional value `target`, so the command will be `goto-label [-h] [-d] [label [target]]`.
 
 
 ##Version 0.4
