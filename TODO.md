@@ -13,15 +13,18 @@ This file is intended to set the project goals. The goals are divided into secti
 1. Define label format.
 
 
+###Version 0.2.2
+
+1. Add flag `-d` or `--delete` to `goto-label`.
+
+
+###Version 0.2.3
+
+1. Add flag `-r` or `--replace` to `goto-label`.
+
+
+
 ##Version 0.3
-
-1. Command `goto-label`.
-
-    1. Add flag `-r --replace`.
-
-
-
-##Version 0.4
 
 1. Working command `goto-list`.
 
