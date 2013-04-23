@@ -7,8 +7,6 @@ This file is intended to set the project goals. The goals are divided into secti
 
 2. Command `goto label` must do the `cd target` when typed.
 
-4. Add optional value `target`, so the command will be `goto-label [-h] [-d] [label [target]]`.
-
 
 ###Version 0.2.1
 
