@@ -17,5 +17,13 @@ goto-label()
 
 # goto-list()
 # {
-#     echo "typed goto-list"
+#     ARGS="$@"
+#     bootstrap_goto.py goto-list $ARGS
+# }
+
+
+# goto-back()
+# {
+#     ARGS="$@"
+#     bootstrap_goto.py goto-back $ARGS
 # }

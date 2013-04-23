@@ -1,5 +1,6 @@
 #Version 0
 
+
 ##Version 0.2
 
 2. Command `goto label` must do the `cd target` when typed.
@@ -16,15 +17,26 @@
 
 1. Add flag `-r` or `--replace` to `goto-label`.
 
+
 ##Version 0.3
 
 1. Working command `goto-list`.
 
     1. Does simple listing.
 
-2. Command `goto`.
+###Version 0.3.1
 
-    1. Add flag `-b [n]` to revert the *n* previous `goto` commands.
+1. Add flags from command `ls`.
+
+
+##Version 0.4
+
+1. Add command `goto-back`.
+
+###Version 0.4.1
+
+1. Add optional value `n` to specify the number of **pops** from the stack.
+
 
 
 #Version 1
@@ -40,6 +52,7 @@
 ##Version 1.1
 
 1. Implement autocomplete using the key **TAB**. Availabe for labels and it's subdirectories.
+
 
 
 #Version 2
