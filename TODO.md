@@ -1,28 +1,20 @@
-#TODO
-
-This file is intended to set the project goals. The goals are divided into sections for each version release.
-
+#Version 0
 
 ##Version 0.2
 
 2. Command `goto label` must do the `cd target` when typed.
 
-
 ###Version 0.2.1
 
 1. Define label format.
-
 
 ###Version 0.2.2
 
 1. Add flag `-d` or `--delete` to `goto-label`.
 
-
 ###Version 0.2.3
 
 1. Add flag `-r` or `--replace` to `goto-label`.
-
-
 
 ##Version 0.3
 
@@ -35,7 +27,7 @@ This file is intended to set the project goals. The goals are divided into secti
     1. Add flag `-b [n]` to revert the *n* previous `goto` commands.
 
 
-##Version 1.0
+#Version 1
 
 1. Command `goto-list` with all listing flags from bash command `ls`.
 
@@ -45,13 +37,12 @@ This file is intended to set the project goals. The goals are divided into secti
 
         Ex: `$ goto label/dir`.
 
-
 ##Version 1.1
 
 1. Implement autocomplete using the key **TAB**. Availabe for labels and it's subdirectories.
 
 
-##Version 2.0
+#Version 2
 
 1. Change file *~/.goto/labels* format and extension to **JSON**. So, the file will be *~/.goto/labels.json* and **Storage** will use the libs to work with **JSON**.
 
