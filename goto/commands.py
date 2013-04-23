@@ -48,6 +48,8 @@ class GotoLabel(object):
 
         self.parser = argparse.ArgumentParser()
         self.parser.set_defaults(mode='insert')
+        self.parser.add_argument('label', nargs='?', help='name of the label')
+        self.parser.add_argument('target', nargs='?', help='path of the target directory')
 
     def add(self, label, target):
         """Adds a entry to the storage.add_label"""
@@ -67,7 +69,10 @@ class GotoLabel(object):
 
         target = os.getcwd()
         label = os.path.basename(target)
-        # TODO checar se <label> e <target> foram dados
+        if args.label:
+            label = args.label
+        if args.target:
+            target = args.target
 
         if args.mode == 'insert':
             self.add(label, target)
