@@ -7,9 +7,10 @@
 import sys
 import os
 
-path = os.path.abspath(__file__) # /home/.../goto-project/tests/__file__.py
-path = path.split('goto-project')[0] + 'goto-project'
-sys.path.insert(0, path)
+PROJECT_DIR = os.path.abspath(__file__) # /home/.../goto-project/tests/__file__.py
+PROJECT_DIR = PROJECT_DIR.split('goto-project')[0] + 'goto-project'
+print(PROJECT_DIR)
+sys.path.insert(0, PROJECT_DIR)
 
 from goto import Storage, ExistentLabelError, NonexistentLabelError, format_label
 from goto import Goto
@@ -25,7 +26,8 @@ def format_output(obj):
 
 
 def test_storage():
-    log = open('storage.md', 'w')
+    filename = PROJECT_DIR + '/tests/storage.md'
+    log = open(filename, 'w')
     log.write('#Log file for `goto/storage` module.')
     log.write('\n\nThis is a log file for tests of module `goto/storage`. A object')
     log.write(" of type `Storage` is created and it's methods are tested.")
@@ -75,7 +77,8 @@ def test_storage():
 
 
 def test_goto():
-    log = open('goto.md', 'w')
+    filename = PROJECT_DIR + '/tests/goto.md'
+    log = open(filename, 'w')
     log.write('#Log file for `goto/command.Goto` class')
 
     goto = Goto()
