@@ -10,11 +10,12 @@ goto()
 
 goto-label()
 {
-    echo "typed goto-label"
+    ARGS="$@"
+    bootstrap_goto.py goto-label $ARGS
 }
 
 
-goto-list()
-{
-    echo "typed goto-list"
-}
+# goto-list()
+# {
+#     echo "typed goto-list"
+# }
