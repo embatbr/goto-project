@@ -85,16 +85,21 @@ class Storage(object):
 
 #### LABEL MANIPULATION METHODS ####
 
-    def add_label(self, label, path):
-        """Adds a label with specified path."""
+    def add_label(self, label, target):
+        """Adds a label with specified target."""
         if label in self.labels:
             raise ExistentLabelError(label)
-        self.labels[label] = path
+        elif len(label) > LABEL_SIZE:
+            raise LabelTooLongError(label)
+
+        self.labels[label] = target
+        self.save()
 
     def get_path(self, label):
-        """Returns the path from a given label."""
+        """Returns the target from a given label."""
         if label not in self.labels:
-            raise NonexistentLabelError(label)
+            raise LabelNotFoundError(label)
+
         return self.labels[label]
 
     def get_all_labels(self):
@@ -117,12 +122,21 @@ class ExistentLabelError(Exception):
         self.label = label
     
     def __str__(self):
-        return ("The label '%s' alredy exist." % self.label)
+        return ("The label '%s' alredy exist.\n" % self.label)
 
-class NonexistentLabelError(Exception):
+class LabelNotFoundError(Exception):
 
     def __init__(self, label):
         self.label = label
     
     def __str__(self):
-        return ("The label '%s' doesn't exist." % self.label)
+        return ("The label '%s' doesn't exist.\n" % self.label)
+
+class LabelTooLongError(Exception):
+
+    def __init__(self, label):
+        self.label = label
+    
+    def __str__(self):
+        return ("The label '%s' is longer than %d characters.\n" % (self.label,
+            LABEL_SIZE))

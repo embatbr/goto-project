@@ -5,15 +5,11 @@ This file is intended to set the project goals. The goals are divided into secti
 
 ##Version 0.2
 
-1. Working command `goto-label`.
+2. Command `goto label` must do the `cd target` when typed.
 
-    1. Command must be typed like `goto-label [-h] [-d] <label>`.
+3. Add optional argument `label`.
 
-    2. It must identify a valid label and target.
-
-2. Command `goto`.
-
-    1. Change directory using `goto label_name`.
+    1. Command must be typed like `goto-label [-h] [-d] [label]`, where `-d` means `--delete`.
 
 
 ##Version 0.3
@@ -22,7 +18,7 @@ This file is intended to set the project goals. The goals are divided into secti
 
     1. Add flag `-r --replace`.
 
-    2. Add optional value `target`.
+    2. Add optional value `target`, so the command will be `goto-label [-h] [-d] [label [target]]`.
 
 
 ##Version 0.4

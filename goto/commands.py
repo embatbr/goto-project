@@ -2,8 +2,10 @@
 
 
 import argparse
+import os
+import sys
 
-from goto.storage import Storage, ExistentLabelError, format_label
+from goto.storage import Storage, ExistentLabelError, LabelTooLongError, format_label
 
 
 class Goto(object):
@@ -38,4 +40,34 @@ class Goto(object):
 class GotoLabel(object):
     """Defines command `goto-label`."""
 
-    pass
+    def __init__(self, storage=Storage()):
+        """Creates a GotoLabel object with default Storage object and the default
+        command's arguments.
+        """
+        self.storage = storage
+
+        self.parser = argparse.ArgumentParser()
+        self.parser.set_defaults(mode='insert')
+
+    def add(self, label, target):
+        """Adds a entry to the storage.add_label"""
+        try:
+            self.storage.add_label(label, target)
+            print("'%s' poinst to '%s'" % (label, target))
+        except ExistentLabelError as e:
+            sys.stderr.write(str(e))
+            sys.exit(-1)
+        except LabelTooLongError as e:
+            sys.stderr.write(str(e))
+            sys.exit(-1)
+
+    def run(self):
+        """Gives control to the user."""
+        args = self.parser.parse_args()
+
+        target = os.getcwd()
+        label = os.path.basename(target)
+        # TODO checar se <label> e <target> foram dados
+
+        if args.mode == 'insert':
+            self.add(label, target)
