@@ -5,8 +5,7 @@ import argparse
 import os
 import sys
 
-from goto.storage import Storage, ExistentLabelError, LabelNotFoundError
-from goto.storage import LabelTooLongError, NotDirectoryError, format_label
+from goto.storage import Storage, StorageError, format_label
 
 
 TEMP_FILE = '/tmp/goto'
@@ -28,7 +27,7 @@ class Goto(object):
     def list_labels(self):
         """Lists all labels with it's respectives paths."""
         if self.storage.labels == {}:
-            return None
+            return "There's no directory labeled."
 
         ret = ''
         for label in self.storage.get_all_labels():
@@ -46,7 +45,7 @@ class Goto(object):
 
             with open(TEMP_FILE, 'w') as f:
                 f.write('cd %s' % target)
-        except Exception as e:
+        except StorageError as e:
             sys.stderr.write(str(e))
             sys.exit(-1)
 
@@ -58,11 +57,7 @@ class Goto(object):
             args.mode = 'chdir'
 
         if args.mode == 'list':
-            ret = self.list_labels()
-            if ret:
-                print(ret)
-            else:
-                sys.stderr.write("There's no directory labeled.\n")
+            print(self.list_labels())
         elif args.mode == 'chdir':
             self.change_directory(args.label)
 
@@ -92,7 +87,7 @@ class GotoLabel(object):
         try:
             self.storage.add_label(label, target)
             print("'%s' poinst to '%s'" % (label, target))
-        except Exception as e:
+        except StorageError as e:
             sys.stderr.write(str(e))
             sys.exit(-1)
 
@@ -101,7 +96,7 @@ class GotoLabel(object):
         try:
             self.storage.delete_label(label)
             print("Label '%s' was successfully deleted." % label)
-        except Exception as e:
+        except StorageError as e:
             sys.stderr.write(str(e))
             sys.exit(-1)
 
@@ -110,7 +105,7 @@ class GotoLabel(object):
         try:
             self.storage.replace_label(label, target)
             print("Label '%s' now points to '%s'." % (label, target))
-        except Exception as e:
+        except StorageError as e:
             sys.stderr.write(str(e))
             sys.exit(-1)
 

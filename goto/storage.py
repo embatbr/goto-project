@@ -11,6 +11,7 @@ STACK_FILENAME = 'stack'
 LABEL_SIZE = 16
 
 
+#### BEGIN STORAGE ####
 class Storage(object):
     """Manipulates files inside .goto directory."""
 
@@ -85,37 +86,45 @@ class Storage(object):
 
 #### LABEL MANIPULATION METHODS ####
 
-    def add_label(self, label, target):
-        """Adds a label with specified target."""
-        if label in self.labels:
-            raise ExistentLabelError(label)
-        elif len(label) > LABEL_SIZE:
+    def __insert_label(self, label, target):
+        """Insert a 'target' given a 'label'."""
+        if len(label) > LABEL_SIZE:
             raise LabelTooLongError(label)
-
-        self.labels[label] = target
-        self.save()
-
-    def delete_label(self, label):
-        """Deletes a existing label."""
-        if label not in self.labels:
-            raise LabelNotFoundError(label)
-
-        del self.labels[label]
-        self.save()
-
-    def replace_label(self, label, target):
-        """Changes label's target to the given target."""
-        if label not in self.labels:
-            raise LabelNotFoundError(label)
-        if not os.path.isdir(target):
+        elif not os.path.isdir(target):
             raise NotDirectoryError(target)
 
         self.labels[label] = target
         self.save()
 
+    def add_label(self, label, target):
+        """Adds a label with specified target."""
+        if label in self.labels:
+            raise ExistentLabelError(label)
+
+        self.__insert_label(label, target)
+
+    def replace_label(self, label, target):
+        """Changes label's target to the given target."""
+        if label not in self.labels:
+            raise LabelNotFoundError(label)
+
+        self.__insert_label(label, target)
+
+    def delete_label(self, label):
+        """Deletes a existing label."""
+        if len(label) > LABEL_SIZE:
+            raise LabelTooLongError(label)
+        elif label not in self.labels:
+            raise LabelNotFoundError(label)
+
+        del self.labels[label]
+        self.save()
+
     def get_path(self, label):
         """Returns the target from a given label."""
-        if label not in self.labels:
+        if len(label) > LABEL_SIZE:
+            raise LabelTooLongError(label)
+        elif label not in self.labels:
             raise LabelNotFoundError(label)
 
         return self.labels[label]
@@ -126,7 +135,9 @@ class Storage(object):
 
 #### STACK MANIPULATION METHODS ####
 
-    # TODO i next version
+    # TODO version 0.4
+
+#### END STORAGE ####
 
 
 def format_label(label):
@@ -134,7 +145,12 @@ def format_label(label):
     return ret
 
 
-class ExistentLabelError(Exception):
+#### BEGIN STORAGE_ERROR ####
+class StorageError(Exception):
+    """'Abstract' class for all exceptions from module `storage`."""
+    pass
+
+class ExistentLabelError(StorageError):
 
     def __init__(self, label):
         self.label = label
@@ -142,7 +158,7 @@ class ExistentLabelError(Exception):
     def __str__(self):
         return ("The label '%s' alredy exist.\n" % self.label)
 
-class LabelNotFoundError(Exception):
+class LabelNotFoundError(StorageError):
 
     def __init__(self, label):
         self.label = label
@@ -150,7 +166,7 @@ class LabelNotFoundError(Exception):
     def __str__(self):
         return ("The label '%s' doesn't exist.\n" % self.label)
 
-class LabelTooLongError(Exception):
+class LabelTooLongError(StorageError):
 
     def __init__(self, label):
         self.label = label
@@ -159,10 +175,11 @@ class LabelTooLongError(Exception):
         return ("The label '%s' is longer than %d characters.\n" % (self.label,
             LABEL_SIZE))
 
-class NotDirectoryError(Exception):
+class NotDirectoryError(StorageError):
 
     def __init__(self, target):
         self.target = target
     
     def __str__(self):
         return ("The target '%s' isn't a directory.\n" % self.target)
+#### END STORAGE_ERROR ####
