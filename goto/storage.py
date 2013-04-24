@@ -2,13 +2,17 @@
 
 
 import os
+import re
 
 
 HOME_DIR = os.path.expanduser("~")
 GOTO_DIR = '%s/.goto' % HOME_DIR
 LABELS_FILENAME = 'labels'
 STACK_FILENAME = 'stack'
+
 LABEL_SIZE = 16
+LABEL_FORMAT = r'[a-z](\w)*'
+LABEL_RE = re.compile(LABEL_FORMAT)
 
 
 #### BEGIN STORAGE ####
@@ -88,7 +92,9 @@ class Storage(object):
 
     def __insert_label(self, label, target):
         """Insert a 'target' given a 'label'."""
-        if len(label) > LABEL_SIZE:
+        if not LABEL_RE.match(label): # the case 'dir/subdir' is passing
+            raise InvalidLabelFormat(label)
+        elif len(label) > LABEL_SIZE:
             raise LabelTooLongError(label)
         elif not os.path.isdir(target):
             raise NotDirectoryError(target)
@@ -150,8 +156,14 @@ class StorageError(Exception):
     """'Abstract' class for all exceptions from module `storage`."""
     pass
 
-class ExistentLabelError(StorageError):
+class InvalidLabelFormat(StorageError):
+    def __init__(self, label):
+        self.label = label
+    
+    def __str__(self):
+        return ("The label '%s' is not in correct format.\n" % self.label)
 
+class ExistentLabelError(StorageError):
     def __init__(self, label):
         self.label = label
     
@@ -159,7 +171,6 @@ class ExistentLabelError(StorageError):
         return ("The label '%s' alredy exist.\n" % self.label)
 
 class LabelNotFoundError(StorageError):
-
     def __init__(self, label):
         self.label = label
     
@@ -167,7 +178,6 @@ class LabelNotFoundError(StorageError):
         return ("The label '%s' doesn't exist.\n" % self.label)
 
 class LabelTooLongError(StorageError):
-
     def __init__(self, label):
         self.label = label
     
@@ -176,7 +186,6 @@ class LabelTooLongError(StorageError):
             LABEL_SIZE))
 
 class NotDirectoryError(StorageError):
-
     def __init__(self, target):
         self.target = target
     
