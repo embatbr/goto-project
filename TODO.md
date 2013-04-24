@@ -3,19 +3,17 @@
 
 ##Version 0.2
 
-2. Command `goto label` must do the `cd target` when typed.
-
 ###Version 0.2.1
-
-1. Define label format.
-
-###Version 0.2.2
 
 1. Add flag `-d` or `--delete` to `goto-label`.
 
-###Version 0.2.3
+###Version 0.2.2
 
 1. Add flag `-r` or `--replace` to `goto-label`.
+
+###Version 0.2.3
+
+1. Define label format.
 
 
 ##Version 0.3

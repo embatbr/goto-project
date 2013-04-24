@@ -5,7 +5,11 @@ import argparse
 import os
 import sys
 
-from goto.storage import Storage, ExistentLabelError, LabelTooLongError, format_label
+from goto.storage import Storage, ExistentLabelError, LabelNotFoundError
+from goto.storage import LabelTooLongError, NotDirectoryError, format_label
+
+
+TEMP_FILE = '/tmp/goto'
 
 
 class Goto(object):
@@ -19,22 +23,48 @@ class Goto(object):
 
         self.parser = argparse.ArgumentParser()
         self.parser.set_defaults(mode='list') # list labels' file
+        self.parser.add_argument('label', nargs='?', help='name of the label')
 
     def list_labels(self):
         """Lists all labels with it's respectives paths."""
+        if self.storage.labels == {}:
+            return None
+
         ret = ''
         for label in self.storage.get_all_labels():
-            ret = '%s\n%s %s' % (ret, format_label(label),
+            ret = '%s%s %s\n' % (ret, format_label(label),
                 self.storage.get_path(label))
 
-        return ret[1:]
+        return ret[:-1]
+
+    def change_directory(self, label):
+        """Writes on temporary file the label's targe."""
+        try:
+            target = self.storage.get_path(label)
+            if not os.path.isdir(target):
+                raise NotDirectoryError(label)
+
+            with open(TEMP_FILE, 'w') as f:
+                f.write('cd %s' % target)
+        except LabelNotFoundError as e:
+            sys.stderr.write(str(e))
+            sys.exit(-1)
 
     def run(self):
         """Gives control to the user."""
         args = self.parser.parse_args()
 
+        if args.label:
+            args.mode = 'chdir'
+
         if args.mode == 'list':
-            print(self.list_labels())
+            ret = self.list_labels()
+            if ret:
+                print(ret)
+            else:
+                sys.stderr.write("There's no directory labeled.\n")
+        elif args.mode == 'chdir':
+            self.change_directory(args.label)
 
 
 class GotoLabel(object):

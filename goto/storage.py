@@ -140,3 +140,11 @@ class LabelTooLongError(Exception):
     def __str__(self):
         return ("The label '%s' is longer than %d characters.\n" % (self.label,
             LABEL_SIZE))
+
+class NotDirectoryError(Exception):
+
+    def __init__(self, label):
+        self.label = label
+    
+    def __str__(self):
+        return ("The label '%s' doesn't point to a directory.\n" % self.label)

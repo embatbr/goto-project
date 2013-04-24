@@ -11,8 +11,6 @@ from goto import Goto, GotoLabel
 
 def bootstrap(args):
     """Function to call the commands."""
-    del args[0]
-
     if args[0] == 'goto':
         goto = Goto()
         return goto.run()
@@ -24,4 +22,5 @@ def bootstrap(args):
 
 
 if __name__ == '__main__':
+    del sys.argv[0]
     bootstrap(sys.argv)
