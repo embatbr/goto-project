@@ -81,6 +81,10 @@ class GotoLabel(object):
         self.parser.add_argument('label', nargs='?', help='name of the label')
         self.parser.add_argument('target', nargs='?', help='path of the target directory')
 
+        group = self.parser.add_mutually_exclusive_group()
+        group.add_argument('-d', '--delete', action='store_const', dest='mode',
+            const='delete', help='delete an existing label')
+
     def add(self, label, target):
         """Adds a entry to the storage.add_label"""
         try:
@@ -90,6 +94,15 @@ class GotoLabel(object):
             sys.stderr.write(str(e))
             sys.exit(-1)
         except LabelTooLongError as e:
+            sys.stderr.write(str(e))
+            sys.exit(-1)
+
+    def delete(self, label):
+        """Deletes a existing label from the storage."""
+        try:
+            self.storage.delete_label(label)
+            print("Label '%s' was successfully deleted." % label)
+        except LabelNotFoundError as e:
             sys.stderr.write(str(e))
             sys.exit(-1)
 
@@ -106,3 +119,5 @@ class GotoLabel(object):
 
         if args.mode == 'insert':
             self.add(label, target)
+        elif args.mode == 'delete':
+            self.delete(label)

@@ -95,6 +95,14 @@ class Storage(object):
         self.labels[label] = target
         self.save()
 
+    def delete_label(self, label):
+        """Deletes a existing label."""
+        if label not in self.labels:
+            raise LabelNotFoundError(label)
+
+        del self.labels[label]
+        self.save()
+
     def get_path(self, label):
         """Returns the target from a given label."""
         if label not in self.labels:

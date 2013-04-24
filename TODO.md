@@ -3,10 +3,6 @@
 
 ##Version 0.2
 
-###Version 0.2.1
-
-1. Add flag `-d` or `--delete` to `goto-label`.
-
 ###Version 0.2.2
 
 1. Add flag `-r` or `--replace` to `goto-label`.
