@@ -42,11 +42,11 @@ class Goto(object):
         try:
             target = self.storage.get_path(label)
             if not os.path.isdir(target):
-                raise NotDirectoryError(label)
+                raise NotDirectoryError(target)
 
             with open(TEMP_FILE, 'w') as f:
                 f.write('cd %s' % target)
-        except LabelNotFoundError as e:
+        except Exception as e:
             sys.stderr.write(str(e))
             sys.exit(-1)
 
@@ -84,25 +84,33 @@ class GotoLabel(object):
         group = self.parser.add_mutually_exclusive_group()
         group.add_argument('-d', '--delete', action='store_const', dest='mode',
             const='delete', help='delete an existing label')
+        group.add_argument('-r', '--replace', action='store_const', dest='mode',
+            const='replace', help="replace an existing label's target")
 
     def add(self, label, target):
         """Adds a entry to the storage.add_label"""
         try:
             self.storage.add_label(label, target)
             print("'%s' poinst to '%s'" % (label, target))
-        except ExistentLabelError as e:
-            sys.stderr.write(str(e))
-            sys.exit(-1)
-        except LabelTooLongError as e:
+        except Exception as e:
             sys.stderr.write(str(e))
             sys.exit(-1)
 
     def delete(self, label):
-        """Deletes a existing label from the storage."""
+        """Deletes an existing label from the storage."""
         try:
             self.storage.delete_label(label)
             print("Label '%s' was successfully deleted." % label)
-        except LabelNotFoundError as e:
+        except Exception as e:
+            sys.stderr.write(str(e))
+            sys.exit(-1)
+
+    def replace(self, label, target):
+        """Replaces an existing label's target."""
+        try:
+            self.storage.replace_label(label, target)
+            print("Label '%s' now points to '%s'." % (label, target))
+        except Exception as e:
             sys.stderr.write(str(e))
             sys.exit(-1)
 
@@ -121,3 +129,5 @@ class GotoLabel(object):
             self.add(label, target)
         elif args.mode == 'delete':
             self.delete(label)
+        elif args.mode == 'replace':
+            self.replace(label, target)

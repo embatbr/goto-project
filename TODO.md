@@ -3,13 +3,9 @@
 
 ##Version 0.2
 
-###Version 0.2.2
-
-1. Add flag `-r` or `--replace` to `goto-label`.
-
 ###Version 0.2.3
 
-1. Define label format.
+1. Define label format (to avoid labels like '~', '/' or '~/dados').
 
 
 ##Version 0.3

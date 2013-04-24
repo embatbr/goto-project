@@ -103,6 +103,16 @@ class Storage(object):
         del self.labels[label]
         self.save()
 
+    def replace_label(self, label, target):
+        """Changes label's target to the given target."""
+        if label not in self.labels:
+            raise LabelNotFoundError(label)
+        if not os.path.isdir(target):
+            raise NotDirectoryError(target)
+
+        self.labels[label] = target
+        self.save()
+
     def get_path(self, label):
         """Returns the target from a given label."""
         if label not in self.labels:
@@ -151,8 +161,8 @@ class LabelTooLongError(Exception):
 
 class NotDirectoryError(Exception):
 
-    def __init__(self, label):
-        self.label = label
+    def __init__(self, target):
+        self.target = target
     
     def __str__(self):
-        return ("The label '%s' doesn't point to a directory.\n" % self.label)
+        return ("The target '%s' isn't a directory.\n" % self.target)
