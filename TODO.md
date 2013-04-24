@@ -1,13 +1,5 @@
 #Version 0
 
-
-##Version 0.2
-
-###Version 0.2.3
-
-1. Define label format (to avoid labels like '~', '/' or '~/dados').
-
-
 ##Version 0.3
 
 1. Working command `goto-list`.
