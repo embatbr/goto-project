@@ -1,12 +1,5 @@
 #Version 0
 
-##Version 0.3
-
-1. Add list flags to command `goto`. Mutually exclusion: `-l`,  `-a`, `label`.
-
-    1. `-l` or `--list`. Equals `ls target`.
-    2. `-a` or `--all`. Same as above, with flag `-a`
-
 ##Version 0.4
 
 1. Discriminate `directory` inside `label` in command `goto`.

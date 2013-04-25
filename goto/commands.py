@@ -24,6 +24,12 @@ class Goto(object):
         self.parser.set_defaults(mode='list') # list labels' file
         self.parser.add_argument('label', nargs='?', help='name of the label')
 
+        group = self.parser.add_mutually_exclusive_group()
+        group.add_argument('-l', '--list', action='store_const', dest='mode',
+            const='list-target', help="equals to 'ls target'")
+        group.add_argument('-a', '--all', action='store_const', dest='mode',
+            const='list-target-all', help="equals to 'ls target'")
+
     def list_labels(self):
         """Lists all labels with it's respectives paths."""
         if self.storage.labels == {}:
@@ -36,15 +42,15 @@ class Goto(object):
 
         return ret[:-1]
 
-    def change_directory(self, label):
-        """Writes on temporary file the label's targe."""
+    def call_bash(self, cmd, label,):
+        """Writes on temporary file the label's target."""
         try:
             target = self.storage.get_path(label)
             if not os.path.isdir(target):
                 raise NotDirectoryError(target)
 
             with open(TEMP_FILE, 'w') as f:
-                f.write('cd %s' % target)
+                f.write('%s %s' % (cmd, target))
         except StorageError as e:
             sys.stderr.write(str(e))
             sys.exit(-1)
@@ -53,13 +59,17 @@ class Goto(object):
         """Gives control to the user."""
         args = self.parser.parse_args()
 
-        if args.label:
+        if args.label and args.mode == 'list':
             args.mode = 'chdir'
 
         if args.mode == 'list':
             print(self.list_labels())
         elif args.mode == 'chdir':
-            self.change_directory(args.label)
+            self.call_bash('cd', args.label)
+        elif args.mode == 'list-target':
+            self.call_bash('ls -l', args.label)
+        elif args.mode == 'list-target-all':
+            self.call_bash('ls -la', args.label)
 
 
 class GotoLabel(object):
