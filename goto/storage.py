@@ -11,8 +11,8 @@ LABELS_FILENAME = 'labels'
 STACK_FILENAME = 'stack'
 
 LABEL_SIZE = 16
-LABEL_FORMAT = r'[a-z](\w)*'
-LABEL_RE = re.compile(LABEL_FORMAT)
+LABEL_REGEX = r'[a-z][a-zA-Z0-9_]*$'
+LABEL_REGEX_OBJECT = re.compile(LABEL_REGEX)
 
 
 #### BEGIN STORAGE ####
@@ -92,7 +92,7 @@ class Storage(object):
 
     def __insert_label(self, label, target):
         """Insert a 'target' given a 'label'."""
-        if not LABEL_RE.match(label): # the case 'dir/subdir' is passing
+        if not LABEL_REGEX_OBJECT.match(label): # the case 'dir/subdir' is passing
             raise InvalidLabelFormat(label)
         elif len(label) > LABEL_SIZE:
             raise LabelTooLongError(label)
@@ -161,7 +161,8 @@ class InvalidLabelFormat(StorageError):
         self.label = label
     
     def __str__(self):
-        return ("The label '%s' is not in correct format.\n" % self.label)
+        return ("The label '%s' is not in format '%s'.\n" % (self.label,
+            LABEL_REGEX))
 
 class ExistentLabelError(StorageError):
     def __init__(self, label):
