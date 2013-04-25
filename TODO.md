@@ -2,38 +2,18 @@
 
 ##Version 0.3
 
-1. Working command `goto-list`.
+1. Add list flags to command `goto`. Mutually exclusion: `-l`,  `-a`, `label`.
 
-    1. Does simple listing.
-
-###Version 0.3.1
-
-1. Add flags from command `ls`.
-
+    1. `-l` or `--list`. Equals `ls target`.
+    2. `-a` or `--all`. Same as above, with flag `-a`
 
 ##Version 0.4
 
-1. Add command `goto-back`.
-
-###Version 0.4.1
-
-1. Add optional value `n` to specify the number of **pops** from the stack.
-
-
-
-#Version 1
-
-1. Command `goto-list` with all listing flags from bash command `ls`.
-
-2. Command `goto`.
-
-    1. Add possibility to discriminate `directory` inside label's target.
+1. Discriminate `directory` inside `label` in command `goto`.
 
         Ex: `$ goto label/dir`.
 
-##Version 1.1
-
-1. Implement autocomplete using the key **TAB**. Availabe for labels and it's subdirectories.
+2. Implement autocomplete using the key **TAB**. Availabe for labels and it's subdirectories.
 
 
 

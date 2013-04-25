@@ -8,7 +8,6 @@ import re
 HOME_DIR = os.path.expanduser("~")
 GOTO_DIR = '%s/.goto' % HOME_DIR
 LABELS_FILENAME = 'labels'
-STACK_FILENAME = 'stack'
 
 LABEL_SIZE = 16
 LABEL_REGEX = r'[a-z][a-zA-Z0-9_]*$'
@@ -19,28 +18,21 @@ LABEL_REGEX_OBJECT = re.compile(LABEL_REGEX)
 class Storage(object):
     """Manipulates files inside .goto directory."""
 
-    def __init__(self, goto_dir=GOTO_DIR, labels_filename=LABELS_FILENAME,
-                 stack_filename=STACK_FILENAME):
+    def __init__(self, goto_dir=GOTO_DIR, labels_filename=LABELS_FILENAME):
         self.goto_dir = goto_dir
         self.labels_path = os.path.join(goto_dir, labels_filename)
-        self.stack_path = os.path.join(goto_dir, stack_filename)
         self.labels = {}
-        self.stack = []
         self.open_files()
 
     def __str__(self):
         ret = '[goto_dir] %s' % self.goto_dir
         ret = '%s\n[labels_path] %s' % (ret, os.path.basename(self.labels_path))
-        ret = '%s\n[stack_path] %s' % (ret, os.path.basename(self.stack_path))
+
         if self.labels:
             ret = '%s\n[labels]' % ret
             for label in self.labels:
                 ret = '%s\n%s%s' % (ret, format_label(label), self.labels[label])
-        if self.stack:
-            ret = '%s\n[stack->base]' % ret
-            for label in self.stack:
-                ret = '%s\n%s' % (ret, label)
-            ret = '%s\n[stack->top]' % ret
+
         return ret
 
 
@@ -51,12 +43,9 @@ class Storage(object):
         if not os.path.exists(self.goto_dir):
             os.makedirs(self.goto_dir)
         open(self.labels_path, 'a').close()
-        open(self.stack_path, 'a').close()
 
         with open(self.labels_path) as f:
             self.read_labels(f)
-        with open(self.stack_path) as f:
-            self.read_stack(f)
 
     def read_labels(self, f):
         """Reads the file '.goto/labels' and write it's content in self.labels."""
@@ -65,27 +54,16 @@ class Storage(object):
             (label, target) = line.split()
             self.labels[label] = target
 
-    def read_stack(self, f):
-        """Reads the file '.goto/stack' and write it's content in self.stack,
-        from base (0) to top (len(self.stack) - 1).
-        """
-        self.stack = f.read().splitlines()
-
     def save(self):
-        """Saves the actual state (new labels and greater stack) into files."""
+        """Saves the actual state (new labels) into file."""
         with open(self.labels_path, 'w') as f:
             for label in self.labels:
                 output = '%s %s\n' % (label, self.labels[label])
-                f.write(output)
-        with open(self.stack_path, 'w') as f:
-            for label in self.stack:
-                output = '%s\n' % label
                 f.write(output)
 
     def flush(self):
         """Erase all storage."""
         self.labels = {}
-        self.stack = []
 
 
 #### LABEL MANIPULATION METHODS ####
@@ -137,12 +115,6 @@ class Storage(object):
 
     def get_all_labels(self):
         return self.labels
-
-
-#### STACK MANIPULATION METHODS ####
-
-    # TODO version 0.4
-
 #### END STORAGE ####
 
 
