@@ -1,4 +1,4 @@
-"""Module defining the commands `goto`, `goto-label` and `goto-list`."""
+"""Module defining the commands `goto` and `label`."""
 
 
 import argparse
@@ -72,19 +72,19 @@ class Goto(object):
             self.call_bash('ls -la', args.label)
 
 
-class GotoLabel(object):
-    """Defines command `goto-label`."""
+class Label(object):
+    """Defines command `label`."""
 
     def __init__(self, storage=Storage()):
-        """Creates a GotoLabel object with default Storage object and the default
+        """Creates a Label object with default Storage object and the default
         command's arguments.
         """
         self.storage = storage
 
         self.parser = argparse.ArgumentParser()
         self.parser.set_defaults(mode='insert')
-        self.parser.add_argument('label', nargs='?', help='name of the label')
-        self.parser.add_argument('target', nargs='?', help='path of the target directory')
+        self.parser.add_argument('name', nargs='?', help='name of the label')
+        self.parser.add_argument('target', nargs='?', help='path of the directory')
 
         group = self.parser.add_mutually_exclusive_group()
         group.add_argument('-d', '--delete', action='store_const', dest='mode',
@@ -92,29 +92,29 @@ class GotoLabel(object):
         group.add_argument('-r', '--replace', action='store_const', dest='mode',
             const='replace', help="replace an existing label's target")
 
-    def add(self, label, target):
+    def add(self, labelname, target):
         """Adds a entry to the storage.add_label"""
         try:
-            self.storage.add_label(label, target)
-            print("'%s' poinst to '%s'" % (label, target))
+            self.storage.add_label(labelname, target)
+            print("'%s' poinst to '%s'" % (labelname, target))
         except StorageError as e:
             sys.stderr.write(str(e))
             sys.exit(-1)
 
-    def delete(self, label):
+    def delete(self, labelname):
         """Deletes an existing label from the storage."""
         try:
-            self.storage.delete_label(label)
-            print("Label '%s' was successfully deleted." % label)
+            self.storage.delete_label(labelname)
+            print("Label '%s' was successfully deleted." % labelname)
         except StorageError as e:
             sys.stderr.write(str(e))
             sys.exit(-1)
 
-    def replace(self, label, target):
+    def replace(self, labelname, target):
         """Replaces an existing label's target."""
         try:
-            self.storage.replace_label(label, target)
-            print("Label '%s' now points to '%s'." % (label, target))
+            self.storage.replace_label(labelname, target)
+            print("Label '%s' now points to '%s'." % (labelname, target))
         except StorageError as e:
             sys.stderr.write(str(e))
             sys.exit(-1)
@@ -124,15 +124,15 @@ class GotoLabel(object):
         args = self.parser.parse_args()
 
         target = os.getcwd()
-        label = os.path.basename(target)
-        if args.label:
-            label = args.label
+        name = os.path.basename(target)
+        if args.name:
+            name = args.name
         if args.target:
             target = args.target
 
         if args.mode == 'insert':
-            self.add(label, target)
+            self.add(name, target)
         elif args.mode == 'delete':
-            self.delete(label)
+            self.delete(name)
         elif args.mode == 'replace':
-            self.replace(label, target)
+            self.replace(name, target)

@@ -16,7 +16,7 @@ goto()
 }
 
 
-goto-label()
+label()
 {
     ARGS="$@"
     bootstrap_goto.py goto-label $ARGS

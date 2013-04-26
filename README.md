@@ -6,7 +6,7 @@ NOTE: This project is a fork from [paulo borges' goto project](https://github.co
 
 It is tested only at linux, but the mac's shell is teorically supported.
 
-Version: 0.3.1
+Version: 0.3.2
 
 Python: 3.2.3
 
@@ -41,17 +41,17 @@ The commands are in the format `goto[-subcommand]`.Their description is as follo
 
 When you type `goto <label>` it internally does `cd <target>`, where `target` is the absolute path pointed by `label`. The flags `-l` and `-a` lists the label's target. It's equivalento to `cd <target> && ls -l[a] && cd -`.
 
-###goto-label
+###label
 
-    usage: goto-label [-h] [-d | -r] [label] [target]
+    usage: goto-label [-h] [-d | -r] [name] [target]
 
     positional arguments:
-      label          name of the label
-      target         path of the target directory
+      name           name of the label
+      target         path of the directory
 
     optional arguments:
       -h, --help     show this help message and exit
       -d, --delete   delete an existing label
       -r, --replace  replace an existing label's target
 
-Create, replace or delete a label. If argument `label` is not provided, the actual directory's basename is taken as `label`. If argument `target` is not provided, the actual path is taken as `target`. The command writes on a file *.goto/labels*, usually located at the user's home.
+Create, replace or delete a label. If argument `name` is not provided, the actual directory's basename is taken as `name`. If argument `target` is not provided, the actual path is taken as `target`. The command writes on a file *.goto/labels*, usually located at the user's home.
