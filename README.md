@@ -4,6 +4,8 @@ Tired of typing a lot to get where the fun is happening? `goto` was made for you
 
 NOTE: This project is a fork from [paulo borges' goto project](https://github.com/pauloborges/goto) implemented using python 3 and with some differences in commands.
 
+It is tested only at linux, but the mac's shell is teorically supported.
+
 Version: 0.3.1
 
 Python: 3.2.3
