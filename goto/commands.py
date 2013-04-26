@@ -5,7 +5,7 @@ import argparse
 import os
 import sys
 
-from goto.storage import Storage, StorageError, format_label
+from goto.storage import Storage, StorageError, NotDirectoryError, format_label
 
 
 TEMP_FILE = '/tmp/goto'
@@ -42,7 +42,7 @@ class Goto(object):
 
         return ret[:-1]
 
-    def call_bash(self, cmd, label,):
+    def call_bash(self, cmd, label, subdir):
         """Writes on temporary file the label's target."""
         try:
             target = self.storage.get_path(label)
@@ -50,7 +50,7 @@ class Goto(object):
                 raise NotDirectoryError(target)
 
             with open(TEMP_FILE, 'w') as f:
-                f.write('%s %s' % (cmd, target))
+                f.write('%s %s%s' % (cmd, target, subdir))
         except StorageError as e:
             sys.stderr.write(str(e))
             sys.exit(-1)
@@ -59,17 +59,26 @@ class Goto(object):
         """Gives control to the user."""
         args = self.parser.parse_args()
 
-        if args.label and args.mode == 'list':
-            args.mode = 'chdir'
+        label = args.label
+        subdir = ''
+        if args.label:
+            label = args.label
+            if args.mode == 'list':
+                args.mode = 'chdir'
+
+            index = args.label.find('/')
+            if index > 0:
+                label = args.label[:index]
+                subdir = '/' + args.label[index + 1:]
 
         if args.mode == 'list':
             print(self.list_labels())
         elif args.mode == 'chdir':
-            self.call_bash('cd', args.label)
+            self.call_bash('cd', label, subdir)
         elif args.mode == 'list-target':
-            self.call_bash('ls -l', args.label)
+            self.call_bash('ls -l', label, subdir)
         elif args.mode == 'list-target-all':
-            self.call_bash('ls -la', args.label)
+            self.call_bash('ls -la', label, subdir)
 
 
 class Label(object):
