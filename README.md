@@ -27,19 +27,29 @@ The commands are in the format `goto[-subcommand]`.Their description is as follo
 
 ###goto
 
-    $ goto -h
-    usage: goto [-h] [-b [n]] [label[/[subpath]]]
-    
-    positional arguments:
-      label         name of the label
-      subpath       path inside label's target (usage: label/subpath)
-    
-    optional arguments:
-      -h, --help    shows help message an exit
-      -b, --back    return to n-th previous 'goto' command; n is 1 by default
+    usage: goto [-h] [-l | -a] [label]
 
-When you type `goto label` it internally does `cd target`, where `target` is the absolute path pointed by `label`. The option `-b` or `--back` returns to n-th previous `goto` command stored in the `~/.goto/stack` file and doesn't require the `label` argument.
+    positional arguments:
+      label       name of the label
+
+    optional arguments:
+      -h, --help  show this help message and exit
+      -l, --list  equals to 'ls -l <label>'
+      -a, --all   equals to 'ls -la <label>'
+
+When you type `goto <label>` it internally does `cd <target>`, where `target` is the absolute path pointed by `label`. The flags `-l` and `-a` lists the label's target. It's equivalento to `cd <target> && ls -l[a] && cd -`.
 
 ###goto-label
 
-###goto-list
+    usage: goto-label [-h] [-d | -r] [label] [target]
+
+    positional arguments:
+      label          name of the label
+      target         path of the target directory
+
+    optional arguments:
+      -h, --help     show this help message and exit
+      -d, --delete   delete an existing label
+      -r, --replace  replace an existing label's target
+
+Create, replace or delete a label. If argument `label` is not provided, the actual directory's basename is taken as `label`. If argument `target` is not provided, the actual path is taken as `target`. The command writes on a file *.goto/labels*, usually located at the user's home.

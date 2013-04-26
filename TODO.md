@@ -11,7 +11,6 @@
 1. Implement auto-complete when typing command `goto`.
 
 
-
 #Version 2
 
 1. Change file *~/.goto/labels* format and extension to **JSON**. So, the file will be *~/.goto/labels.json* and **Storage** will use the libs to work with **JSON**.

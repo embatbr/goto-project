@@ -10,7 +10,7 @@ GOTO_DIR = '%s/.goto' % HOME_DIR
 LABELS_FILENAME = 'labels'
 
 LABEL_SIZE = 16
-LABEL_REGEX = r'[a-z][a-zA-Z0-9_]*$'
+LABEL_REGEX = r'[a-z][a-zA-Z0-9_-]*$'
 LABEL_REGEX_OBJECT = re.compile(LABEL_REGEX)
 
 
