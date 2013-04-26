@@ -26,9 +26,9 @@ class Goto(object):
 
         group = self.parser.add_mutually_exclusive_group()
         group.add_argument('-l', '--list', action='store_const', dest='mode',
-            const='list-target', help="equals to 'ls target'")
+            const='list-target', help="equals to 'ls -l target'")
         group.add_argument('-a', '--all', action='store_const', dest='mode',
-            const='list-target-all', help="equals to 'ls target'")
+            const='list-target-all', help="equals to 'ls -la target'")
 
     def list_labels(self):
         """Lists all labels with it's respectives paths."""
