@@ -6,7 +6,7 @@ NOTE: This project is a fork from [paulo borges' goto project](https://github.co
 
 It is tested only at linux, but the mac's shell is teorically supported.
 
-Version: 0.3.2
+Version: 1.0
 
 Python: 3.2.3
 

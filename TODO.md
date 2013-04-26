@@ -1,14 +1,16 @@
 #Version 1
 
+##Version 1.1
+
+1. Implement auto-complete when typing command `goto`.
+
+##Version 1.2
+
 1. Discriminate `directory` inside `label` in command `goto`.
 
     Ex: `$ goto label/dir`.
 
 2. Implement autocomplete using the key **TAB**. Availabe for labels and it's subdirectories.
-
-##Version 1.1
-
-1. Implement auto-complete when typing command `goto`.
 
 
 #Version 2
