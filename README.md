@@ -43,7 +43,7 @@ When you type `goto <label>` it internally does `cd <target>`, where `target` is
 
 ###label
 
-    usage: goto-label [-h] [-d | -r] [name] [target]
+    usage: label [-h] [-d | -r] [name] [target]
 
     positional arguments:
       name           name of the label
