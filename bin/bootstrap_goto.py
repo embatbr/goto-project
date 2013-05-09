@@ -14,9 +14,9 @@ def bootstrap(args):
     if args[0] == 'goto':
         goto = Goto()
         return goto.run()
-    elif args[0] == 'goto-label':
-        goto_label = Label()
-        return goto_label.run()
+    elif args[0] == 'label':
+        label = Label()
+        return label.run()
 
     sys.exit(-1)
 

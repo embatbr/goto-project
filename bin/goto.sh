@@ -19,5 +19,5 @@ goto()
 label()
 {
     ARGS="$@"
-    bootstrap_goto.py goto-label $ARGS
+    bootstrap_goto.py label $ARGS
 }
