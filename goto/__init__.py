@@ -1,7 +1,10 @@
 """package: goto"""
 
 
-from goto.commands import Goto, Label
+from commands import Goto, Label
 
-from goto.storage import Storage, ExistentLabelError, LabelNotFoundError, LabelTooLongError
-from goto.storage import format_label
+from storage import Storage, ExistentLabelError, LabelNotFoundError, LabelTooLongError
+from storage import format_label
+
+__all__ = ['Goto', 'Label', 'Storage', 'ExistentLabelError', 'LabelNotFoundError',
+           'LabelTooLongError', 'format_label']

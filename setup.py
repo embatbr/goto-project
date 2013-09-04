@@ -75,7 +75,8 @@ setup(name='goto-project',
       description="easy'n'fast cd'ing",
       long_description=readme(),
 
-      packages=['goto'],
-      scripts=['bin/bootstrap_goto.py', 'bin/goto.sh'],
+      packages=['bin', 'goto'],
+      scripts=['bin/bootstrap_goto.py', 'bin/goto.sh', 'goto/__init__.py', 'goto/commands.py',
+               'goto/storage.py'],
       cmdclass={ 'install': GotoInstall }
       )

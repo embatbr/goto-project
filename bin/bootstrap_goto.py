@@ -1,4 +1,4 @@
-#!/user/bin/python3.2
+#!/usr/bin/python3.2
 
 
 """This module calls the 'real' code."""
@@ -7,6 +7,7 @@
 import sys
 
 from goto import Goto, Label
+# from goto import *
 
 
 def bootstrap(args):

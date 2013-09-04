@@ -5,7 +5,7 @@ import argparse
 import os
 import sys
 
-from goto.storage import Storage, StorageError, NotDirectoryError, format_label
+from storage import Storage, StorageError, NotDirectoryError, format_label
 
 
 TEMP_FILE = '/tmp/goto'
