@@ -1,6 +1,3 @@
-#!/usr/bin/python3.2
-
-
 """Setup script. It creates a distribution and installs the program into the
 system.
 
