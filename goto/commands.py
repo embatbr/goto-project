@@ -104,8 +104,9 @@ class Label(object):
     def add(self, labelname, target):
         """Adds a entry to the storage.add_label"""
         try:
-            self.storage.add_label(labelname, target)
-            print("'%s' poinst to '%s'" % (labelname, target))
+            target_path = os.path.abspath(target)
+            self.storage.add_label(labelname, target_path)
+            print("'%s' poinst to '%s'" % (labelname, target_path))
         except StorageError as e:
             sys.stderr.write(str(e))
             sys.exit(-1)
@@ -122,8 +123,9 @@ class Label(object):
     def replace(self, labelname, target):
         """Replaces an existing label's target."""
         try:
-            self.storage.replace_label(labelname, target)
-            print("Label '%s' now points to '%s'." % (labelname, target))
+            target_path = os.path.abspath(target)
+            self.storage.replace_label(labelname, target_path)
+            print("Label '%s' now points to '%s'." % (labelname, target_path))
         except StorageError as e:
             sys.stderr.write(str(e))
             sys.exit(-1)
